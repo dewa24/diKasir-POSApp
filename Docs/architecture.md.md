@@ -1,21 +1,48 @@
-MIT License
+# diKasir-POSApp Architecture
 
-Copyright (c) 2026 dewa24
+This document describes the technical architecture of **diKasir-POSApp**, a modern Point of Sale (POS) application built with WinUI 3. The design follows clean architecture principles to ensure scalability, maintainability, and compliance.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+---
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+## 🎯 Design Principles
+- **Clean Architecture**: Separation of concerns between domain, application, infrastructure, and presentation.
+- **Scalability**: Supports kiosks, stores, and malls with modular components.
+- **Compliance & Auditability**: Every transaction is logged with audit trails.
+- **Role-Based UI**: Different user interfaces for cashier, supervisor, and admin.
+- **Hardware Integration**: Support for POS printers, barcode scanners, and cash drawers.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+---
+
+## 🏗️ Layered Structure
+
++---------------------------------------------------+ | Presentation | | WinUI 3 UI, Views, ViewModels, Role-based UI | +---------------------------------------------------+ | Application | | Use Cases, Services, Validation, Business Logic | +---------------------------------------------------+ | Domain | | Entities, Value Objects, Business Rules | +---------------------------------------------------+ | Infrastructure | | Database, API Gateway, Hardware Integration | +---------------------------------------------------+ | Tests | | Unit Tests, Integration Tests | +---------------------------------------------------+
+
+---
+
+## 📂 Project Folder Structure
+
+POSApp/ ├── Domain/ # Core business entities and rules │ └── .gitkeep ├── Application/ # Use cases and service layer │ └── .gitkeep ├── Infrastructure/ # Database, APIs, hardware integration │ └── .gitkeep ├── Presentation/ # WinUI 3 UI, ViewModels, role-based UI │ └── .gitkeep └── Tests/ # Unit and integration tests └── .gitkeep
+
+---
+
+## 🔌 Integrations
+- **Database Layer**: SQLite (default) or SQL Server for enterprise deployments.
+- **API Gateway**: Connects POSApp with web dashboards and analytics.
+- **Hardware**: ESC/POS printers, barcode scanners, cash drawers.
+
+---
+
+## 📊 Audit Trail
+Each transaction and data change is recorded with:
+- Timestamp
+- User ID
+- Action (insert/update/delete)
+- Metadata (device, role)
+
+---
+
+## 📈 Roadmap
+- [ ] Multi-tenant support
+- [ ] Web dashboard for analytics
+- [ ] Digital payment integration (QRIS, e-wallet)
+- [ ] CI/CD pipeline for automated deployment
